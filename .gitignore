@@ -23,3 +23,13 @@ outputs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Ignore everything in sample_pdfs
+sample_pdfs/*
+
+# But keep these 5 official test PDFs
+!sample_pdfs/1_clean.pdf
+!sample_pdfs/2_DoB_variant.pdf
+!sample_pdfs/3_age_only.pdf
+!sample_pdfs/4_scanned_skewed.pdf
+!sample_pdfs/5_missing_report.pdf
