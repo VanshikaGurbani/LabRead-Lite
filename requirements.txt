@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pdfplumber
+pymupdf
+opencv-python-headless
+pytesseract
+Pillow
+pydantic
+python-multipart
+reportlab
