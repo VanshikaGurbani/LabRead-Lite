@@ -121,7 +121,7 @@ The code auto-detects the default Windows path if present.
 - Windows PowerShell:
 ```powershell
 python -m venv .venv
-. .\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 
 - macOS/Linux:
