@@ -1,4 +1,4 @@
-### LabRead Lite — Lab Report Header Extract (PoC)
+### LabRead Lite - Lab Report Header Extract (PoC)
 
 A small proof‑of‑concept built to demonstrate systems thinking and coding skills in a constrained timeframe. The service extracts key header fields from the first page of a lab report PDF and returns structured JSON.
 
