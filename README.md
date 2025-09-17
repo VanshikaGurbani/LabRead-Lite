@@ -114,7 +114,7 @@ The code auto-detects the default Windows path if present.
 
 ## Setup & Run
 
-1) Clone and enter the project:
+1) Clone and enter the project
 
 2) Create and activate a virtual environment:
 
