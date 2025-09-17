@@ -96,28 +96,8 @@ See `requirements.txt` for exact dependencies.
 ## Prerequisites
 
 - Python 3.10+ recommended
-- Tesseract OCR installed and available on PATH (or configure `TESSERACT_CMD`)
 - OS packages:
   - Windows/macOS/Linux supported; OpenCV is installed via wheels (`opencv-python-headless`)
-
-### Install Tesseract OCR
-
-- Windows (recommended installer):
-  - Download from `https://github.com/UB-Mannheim/tesseract/wiki`
-  - Default path: `C:\Program Files\Tesseract-OCR\tesseract.exe`
-- macOS (Homebrew):
-  - `brew install tesseract`
-- Ubuntu/Debian:
-  - `sudo apt-get update && sudo apt-get install -y tesseract-ocr`
-
-If Tesseract is not on PATH, set the environment variable `TESSERACT_CMD`:
-
-- Windows PowerShell:
-  - `$env:TESSERACT_CMD="C:\Program Files\Tesseract-OCR\tesseract.exe"`
-- macOS/Linux (bash/zsh):
-  - `export TESSERACT_CMD=/usr/local/bin/tesseract`  (adjust path as needed)
-
-The code auto-detects the default Windows path if present.
 
 ---
 
@@ -197,6 +177,46 @@ Expected JSON (example):
 - Containerization (Dockerfile) and CI to run tests and linting.
 - Security hardening (file size/type limits, rate limiting).
 
+---
+
+## Architecture
+
+### Current PoC
+- Single FastAPI service running locally.
+- Direct calls to `pdfplumber` (text) and Tesseract OCR (fallback).
+- Regex-based parsing, no external persistence or services.
+- Suitable for demonstrating approach and correctness on sample PDFs.
+
+### Ideal High-Level Architecture (Production)
+
+```text
+                ┌──────────────┐
+                │   Client UI  │
+                └──────┬───────┘
+                       │ (Upload PDF via API)
+                ┌──────▼───────┐
+                │   API Layer  │  FastAPI + AuthN/AuthZ
+                └──────┬───────┘
+                       │
+        ┌──────────────┴───────────────┐
+        │      Processing Pipeline      │
+        │                               │
+        │  • Text extraction (pdfplumber)
+        │  • OCR fallback (Tesseract/Cloud OCR)
+        │  • Parsing & normalization
+        │  • Confidence scoring         │
+        └──────────────┬───────────────┘
+                       │
+             ┌─────────▼──────────┐
+             │   Storage Layer    │ (DB or object store for reports, logs)
+             └─────────┬──────────┘
+                       │
+              ┌────────▼─────────┐
+              │   Analytics &    │
+              │ Monitoring       │ (metrics, dashboards, error logs)
+              └──────────────────┘
+
+```
 ---
 
 ## Notes for the Reviewer
