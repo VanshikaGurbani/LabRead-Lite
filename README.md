@@ -8,7 +8,7 @@ A small proof‑of‑concept built to demonstrate systems thinking and coding sk
 
 ---
 
-## Problem Statement (interpreted)
+## Problem Statement
 
 Given a limited time window, build a simple service that:
 - Accepts a lab report PDF upload
