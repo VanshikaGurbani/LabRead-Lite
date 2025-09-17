@@ -187,7 +187,7 @@ Expected JSON (example):
 - Regex-based parsing, no external persistence or services.
 - Suitable for demonstrating approach and correctness on sample PDFs.
 
-### Ideal High-Level Architecture (Production)
+### Ideal High-Level Architecture
 
 ```text
                 ┌──────────────┐
