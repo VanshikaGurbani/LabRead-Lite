@@ -10,11 +10,11 @@ A small proof‑of‑concept built to demonstrate systems thinking and coding sk
 
 ## Problem Statement
 
-Given a limited time window, build a simple service that:
+Build a lightweight service that:
 - Accepts a lab report PDF upload
-- Extracts header fields (Name, DOB/Age, Gender, Report Type) from the first page
-- Returns structured JSON with a coarse confidence estimate and any warnings
-- Exposes a minimal, self‑documenting API
+- Extracts header fields: **Patient Name, DOB (or Age), Gender, Report Type**
+- Returns structured JSON with a confidence score and warnings
+- Exposes a minimal API for quick evaluation
 
 This is intentionally a PoC: correctness, coverage, and polish are secondary to demonstrating approach and structure.
 
@@ -40,14 +40,21 @@ This is intentionally a PoC: correctness, coverage, and polish are secondary to 
   - `GET /health` liveness
   - Interactive docs at `/docs`
 
-Directory highlights:
-- `app.py` — FastAPI app and endpoints
-- `extractor.py` — pipeline orchestration (text extraction, OCR fallback, confidence, warnings)
-- `parsers.py` — field parsers and normalization
-- `ocr_utils.py` — rendering and image preprocessing
-- `models.py` — response schema
-- `sample_pdfs/` — example inputs
-- `tests/` — quick script to exercise the flow
+## 📂 Project Structure
+
+```text
+labread-lite/
+├─ app.py              # FastAPI app and endpoints
+├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
+├─ parsers.py          # Regex parsers for fields
+├─ ocr_utils.py        # Image rendering and preprocessing
+├─ models.py           # Response schema
+├─ sample_pdfs/        # Example PDFs for testing
+├─ tests/
+│  ├─ test_runner.py   # Runs extraction on all sample PDFs
+│  └─ make_samples.py  # Generates synthetic sample PDFs (via reportlab)
+├─ requirements.txt
+└─ README.md
 
 ---
 
