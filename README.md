@@ -144,37 +144,27 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4) Ensure Tesseract is installed and accessible (see Prerequisites). Optionally set `TESSERACT_CMD` (if not on PATH):
-```powershell
-# Windows example
-$env:TESSERACT_CMD="C:\Program Files\Tesseract-OCR\tesseract.exe"
-```
-```bash
-# macOS/Linux example
-export TESSERACT_CMD=/usr/local/bin/tesseract
-```
-
-5) Run the API:
+4) Run the API:
 ```bash
 uvicorn app:app --reload
 ```
 
-6) Open the interactive API docs:
+5) Open the interactive API docs:
 - Browser: `http://127.0.0.1:8000/`
 - **Important**: Add `/docs` to the URL to access Swagger UI: `http://127.0.0.1:8000/docs`
 
-7) Test the API using Swagger UI:
+6) Test the API using Swagger UI:
 - In the Swagger UI, expand the `POST /extract` endpoint
 - Click "Try it out"
 - Click "Choose File" and select a PDF from `sample_pdfs/` folder
 - Click "Execute" to test the extraction
 
-8) Alternative: Test via terminal:
+7) Alternative: Test via terminal:
 ```bash
 python tests/test_runner.py
 ```
 
-9) Alternative: Test via curl:
+8) Alternative: Test via curl:
 ```bash
 curl -X POST "http://127.0.0.1:8000/extract" \
   -H "accept: application/json" \
