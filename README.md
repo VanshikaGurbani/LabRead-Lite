@@ -54,7 +54,7 @@ labread-lite/
 ├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
 ├─ models.py           # Response schema
 ├─ ocr_utils.py        # Image rendering and preprocessing
-├─ out.txt             # Example output log (optional)
+├─ out.txt             # Example output log
 ├─ parsers.py          # Regex parsers for fields
 └─ requirements.txt    # Python dependencies
 ```
