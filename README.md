@@ -8,7 +8,7 @@ A small proof‑of‑concept built to demonstrate systems thinking and coding sk
 
 ---
 
-## Problem Statement
+## Problem Statement (interpreted)
 
 Given a limited time window, build a simple service that:
 - Accepts a lab report PDF upload
@@ -23,8 +23,8 @@ This is intentionally a PoC: correctness, coverage, and polish are secondary to 
 ## Approach
 
 - Dual text extraction:
-  - Try fast, text‑based extraction via `pdfplumber`
-  - If text is sparse, fall back to OCR:
+  - First attempt: Fast text-based extraction via `pdfplumber`
+  - Fallback: OCR processing when text extraction yields insufficient results:
     - Render first page with `pymupdf` at high DPI
     - Light preprocessing (deskew, grayscale, thresholding, sharpen)
     - Run `pytesseract` (Tesseract OCR) with `--psm 4`
@@ -143,3 +143,65 @@ $env:TESSERACT_CMD="C:\Program Files\Tesseract-OCR\tesseract.exe"
 ```bash
 # macOS/Linux example
 export TESSERACT_CMD=/usr/local/bin/tesseract
+```
+
+5) Run the API:
+```bash
+uvicorn app:app --reload
+```
+
+6) Open the interactive API docs:
+- Browser: `http://127.0.0.1:8000/`
+- **Important**: Add `/docs` to the URL to access Swagger UI: `http://127.0.0.1:8000/docs`
+
+7) Test the API using Swagger UI:
+- In the Swagger UI, expand the `POST /extract` endpoint
+- Click "Try it out"
+- Click "Choose File" and select a PDF from `sample_pdfs/` folder
+- Click "Execute" to test the extraction
+
+8) Alternative: Test via terminal:
+```bash
+python tests/test_runner.py
+```
+
+9) Alternative: Test via curl:
+```bash
+curl -X POST "http://127.0.0.1:8000/extract" \
+  -H "accept: application/json" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@sample_pdfs/1_clean.pdf"
+```
+
+Expected JSON (example):
+```json
+{
+  "patientName": "Jane A. Doe",
+  "dob": "1982-07-03",
+  "age": 42,
+  "gender": null,
+  "reportType": "Comprehensive Metabolic Panel",
+  "confidence": 0.82,
+  "warnings": ["DOB missing; inferred from Age"]
+}
+```
+
+---
+
+## What I'd Improve with More Time
+
+- More robust parsing using layout cues (coordinates, fonts) and named‑entity recognition.
+- Better confidence calibration with per‑field quality signals and training data.
+- Support multi‑page heuristics and cross‑checks (e.g., header + footer consistency).
+- Expand report type ontology and fuzzy matching.
+- Batch and async processing, plus basic observability (metrics, logs, tracing).
+- Containerization (Dockerfile) and CI to run tests and linting.
+- Security hardening (file size/type limits, rate limiting).
+
+---
+
+## Notes for the Reviewer
+
+- This is an intentionally lean PoC focused on approach and structure over polish.
+- The code prefers clarity and explicit steps for easy review and iteration.
+- Sample PDFs are provided in `sample_pdfs/` for quick evaluation.
