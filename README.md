@@ -42,6 +42,7 @@ This is intentionally a PoC: correctness, coverage, and polish are secondary to 
 
 ## Project Structure
 
+```text
 labread-lite/
 ├─ app.py              # FastAPI app and endpoints
 ├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
@@ -54,7 +55,7 @@ labread-lite/
 │  └─ make_samples.py  # Generates synthetic sample PDFs (via reportlab)
 ├─ requirements.txt
 └─ README.md
-
+```
 ---
 
 ## Tools & Technologies
