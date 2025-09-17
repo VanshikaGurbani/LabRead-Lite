@@ -40,9 +40,8 @@ This is intentionally a PoC: correctness, coverage, and polish are secondary to 
   - `GET /health` liveness
   - Interactive docs at `/docs`
 
-## 📂 Project Structure
+## Project Structure
 
-```text
 labread-lite/
 ├─ app.py              # FastAPI app and endpoints
 ├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
