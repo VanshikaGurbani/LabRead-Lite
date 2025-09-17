@@ -44,17 +44,19 @@ This is intentionally a PoC: correctness, coverage, and polish are secondary to 
 
 ```text
 labread-lite/
-├─ app.py              # FastAPI app and endpoints
-├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
-├─ parsers.py          # Regex parsers for fields
-├─ ocr_utils.py        # Image rendering and preprocessing
-├─ models.py           # Response schema
-├─ sample_pdfs/        # Example PDFs for testing
-├─ tests/
+├─ sample_pdfs/        # Official 5 test PDFs for evaluation
+├─ tests/              # Test scripts
 │  ├─ test_runner.py   # Runs extraction on all sample PDFs
 │  └─ make_samples.py  # Generates synthetic sample PDFs (via reportlab)
-├─ requirements.txt
-└─ README.md
+├─ .gitignore          # Ignore rules (venv, cache, outputs)
+├─ README.md           # Project documentation
+├─ app.py              # FastAPI app and endpoints
+├─ extractor.py        # Pipeline: text extraction + OCR fallback + parsing
+├─ models.py           # Response schema
+├─ ocr_utils.py        # Image rendering and preprocessing
+├─ out.txt             # Example output log (optional)
+├─ parsers.py          # Regex parsers for fields
+└─ requirements.txt    # Python dependencies
 ```
 ---
 
